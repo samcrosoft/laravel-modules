@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'providers' => [
+        \{{path}}\{{namespace}}\Providers\{{namespace}}ServiceProvider::class,
+    ],
+
+    'aliases' => [
+    ]
+];
