@@ -1,6 +1,7 @@
 {
   "name": "samcrosoft/laravel-modules",
-  "keywords": ["laravel, modules"],
+  "keywords": ["laravel", "modules"],
+  "description":"A library that allows you to re-organize your codes into modules",
   "type":"project",
   "license": "MIT",
   "authors": [
