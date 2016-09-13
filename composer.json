@@ -1,6 +1,7 @@
 {
   "name": "samcrosoft/laravel-modules",
-  "type": "laravel, modules",
+  "keywords": ["laravel, modules"],
+  "type":"project",
   "license": "MIT",
   "authors": [
     {
