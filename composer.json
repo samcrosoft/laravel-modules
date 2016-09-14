@@ -1,9 +1,13 @@
 {
   "name": "samcrosoft/laravel-modules",
-  "keywords": ["laravel", "modules"],
-  "description":"A library that allows you to re-organize your codes into modules",
-  "type":"project",
+  "keywords": [
+    "laravel",
+    "modules"
+  ],
+  "description": "A library that allows you to re-organize your codes into modules",
+  "type": "project",
   "license": "MIT",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "samuel Olowofela",
@@ -19,9 +23,9 @@
   "autoload": {
     "psr-4": {
       "Samcrosoft\\LaravelModules\\": "src/",
-      "Tests\\":"test/"
+      "Tests\\": "test/"
     },
-    "classmap":[
+    "classmap": [
       "tests/BaseTestCase.php"
     ]
   }
