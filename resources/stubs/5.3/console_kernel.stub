@@ -1,0 +1,32 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: adebola
+ * Date: 17/09/2016
+ * Time: 17:19
+ */
+namespace {{path}}\{{namespace}};
+
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
+class Kernel
+{
+    /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        //
+    ];
+
+    /**
+     * Register the Closure based commands for the application.
+     *
+     * @return void
+     */
+    public static function registerRouteCommands()
+    {
+        require (config('modules.path').'/{{name}}/routes/console.php');
+    }
+}

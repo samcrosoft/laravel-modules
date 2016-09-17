@@ -86,6 +86,8 @@ class MakeModuleCommand extends Command
     protected $moduleFiles = [
         'database/seeds/{{namespace}}DatabaseSeeder.php', // work on this!
         'routes/web.php',
+        'routes/console.php',
+        'app/Console/Kernel.php',
         'app/Providers/{{namespace}}ServiceProvider.php',
         'app/Providers/RouteServiceProvider.php',
         'module.json',
@@ -102,6 +104,8 @@ class MakeModuleCommand extends Command
     protected $moduleStubs = [
         'seeder',
         'routes',
+        'routes_console',
+        'console_kernel',
         'module_service_provider',
         'route_service_provider',
         'manifest',

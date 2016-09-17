@@ -1,0 +1,37 @@
+<?php
+
+namespace {{path}}\{{namespace}}\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\Router;
+
+class ConsoleServiceProvider extends ServiceProvider
+{
+	/**
+	 * The controller namespace for base command folder for the module.
+	 *
+	 * @var string|null
+	 */
+	protected $namespace = '{{path}}\{{namespace}}\Console\Commands';
+
+	/**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+	public function boot()
+	{
+		parent::boot();
+
+		//
+	}
+
+	/**
+	 * Define the routes defined console commands for the module.
+	 *
+	 */
+	public function map(Router $router)
+	{
+		require (config('modules.path').'/{{name}}/routes/console.php');
+	}
+}
