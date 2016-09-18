@@ -3,6 +3,8 @@
 namespace Samcrosoft\LaravelModules\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Samcrosoft\LaravelModules\Console\Generators\MakeConsoleCommand;
+use Samcrosoft\LaravelModules\Console\Generators\MakeControllerCommand;
 use Samcrosoft\LaravelModules\Console\Generators\MakeMiddlewareCommand;
 use Samcrosoft\LaravelModules\Console\Generators\MakeMigrationCommand;
 use Samcrosoft\LaravelModules\Console\Generators\MakeModelCommand;
@@ -37,6 +39,11 @@ class GeneratorServiceProvider extends ServiceProvider
         $this->registerMakeModuleCommand();
         $this->registerMakeRequestCommand();
         $this->registerMakeSeederCommand();
+
+        /*
+         * Console command
+         */
+        $this->registerMakeConsoleCommand();
     }
 
     /**
@@ -45,7 +52,7 @@ class GeneratorServiceProvider extends ServiceProvider
     private function registerMakeControllerCommand()
     {
         $this->app->singleton('command.make.module.controller', function ($app) {
-            return $app[MakeMigrationCommand::class];
+            return $app[MakeControllerCommand::class];
         });
 
         $this->commands('command.make.module.controller');
@@ -121,5 +128,17 @@ class GeneratorServiceProvider extends ServiceProvider
         });
 
         $this->commands('command.make.module.seeder');
+    }
+
+    /**
+     * Register the make:module:command command.
+     */
+    private function registerMakeConsoleCommand()
+    {
+        $this->app->singleton('command.make.module.command', function ($app) {
+            return $app[MakeConsoleCommand::class];
+        });
+
+        $this->commands('command.make.module.command');
     }
 }

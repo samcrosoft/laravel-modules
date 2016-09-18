@@ -86,8 +86,12 @@ class MakeModuleCommand extends Command
     protected $moduleFiles = [
         'database/seeds/{{namespace}}DatabaseSeeder.php', // work on this!
         'routes/web.php',
+        'routes/console.php',
+        'app/Console/Kernel.php',
+        'app/Providers/{{namespace}}BaseServiceProvider.php',
         'app/Providers/{{namespace}}ServiceProvider.php',
         'app/Providers/RouteServiceProvider.php',
+        'app/Providers/ConsoleServiceProvider.php',
         'module.json',
         'config/app.php',
         'config/autoload.php',
@@ -100,10 +104,14 @@ class MakeModuleCommand extends Command
      * @var array
      */
     protected $moduleStubs = [
-        'seeder',
+        'database_seeder',
         'routes',
+        'routes_console',
+        'console_kernel',
+        'module_base_service_provider',
         'module_service_provider',
         'route_service_provider',
+        'console_service_provider',
         'manifest',
         'config_app',
         'config_autoload',
@@ -348,7 +356,9 @@ class MakeModuleCommand extends Command
         return str_replace(
             ['{{slug}}', '{{name}}', '{{namespace}}', '{{version}}', '{{description}}',
                 '{{author}}', '{{license}}', '{{path}}'],
-            [$this->container['slug'], $this->container['name'], $this->container['namespace'], $this->container['version'], $this->container['description'], $this->container['author'], $this->container['license'],
+            [$this->container['slug'], $this->container['name'], $this->container['namespace'],
+                $this->container['version'], $this->container['description'],
+                $this->container['author'], $this->container['license'],
                 $this->module->getNamespace()],
             $content
         );

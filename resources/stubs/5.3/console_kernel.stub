@@ -1,0 +1,28 @@
+<?php
+
+
+/**
+ * Created by PhpStorm.
+ * User: adebola
+ * Date: 17/09/2016
+ * Time: 17:19
+ */
+namespace {{path}}\{{namespace}}\Console;
+
+use Samcrosoft\LaravelModules\Support\ConsoleKernel;
+
+/**
+ * Class Kernel
+ */
+class Kernel extends ConsoleKernel
+{
+    /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        //
+    ];
+
+}
