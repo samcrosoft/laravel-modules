@@ -7,6 +7,7 @@
  */
 
 namespace Samcrosoft\LaravelModules\Console\Generators;
+use Illuminate\Support\Str;
 
 /**
  * Class MakeConsoleCommand
@@ -15,6 +16,7 @@ namespace Samcrosoft\LaravelModules\Console\Generators;
  */
 class MakeConsoleCommand extends MakeCommand
 {
+
     /**
      * The name and signature of the console command.
      *
@@ -44,7 +46,7 @@ class MakeConsoleCommand extends MakeCommand
      * @var array
      */
     protected $listFolders = [
-        'Console/Commands/',
+        'app/Console/Commands/',
     ];
 
     /**
@@ -85,7 +87,9 @@ class MakeConsoleCommand extends MakeCommand
     {
         $this->container['filename']  = $this->makeFileName($filePath);
         $this->container['namespace'] = $this->getNamespace($filePath);
-        $this->container['path']      = $this->getBaseNamespace();
+        $this->container['path']      = $this->module->getNamespace();
+        $this->container['slug']      = Str::slug($this->argument('slug'));
+        $this->container['name']      = Str::camel($this->container['slug']);
         $this->container['classname'] = basename($filePath);
 
         return;
@@ -103,12 +107,14 @@ class MakeConsoleCommand extends MakeCommand
             [
                 '{{filename}}',
                 '{{path}}',
+                '{{name}}',
                 '{{namespace}}',
                 '{{classname}}',
             ],
             [
                 $this->container['filename'],
                 $this->container['path'],
+                $this->container['name'],
                 $this->container['namespace'],
                 $this->container['classname'],
             ],

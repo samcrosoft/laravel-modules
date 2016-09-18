@@ -38,7 +38,7 @@ class MakeModelCommand extends MakeCommand
      * @var array
      */
     protected $listFolders = [
-        'Models/',
+        'app/Models/',
     ];
 
     /**

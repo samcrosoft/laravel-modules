@@ -1,15 +1,20 @@
 <?php
+
+
 /**
  * Created by PhpStorm.
  * User: adebola
  * Date: 17/09/2016
  * Time: 17:19
  */
-namespace {{path}}\{{namespace}};
+namespace {{path}}\{{namespace}}\Console;
 
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Samcrosoft\LaravelModules\Support\ConsoleKernel;
 
-class Kernel
+/**
+ * Class Kernel
+ */
+class Kernel extends ConsoleKernel
 {
     /**
      * The Artisan commands provided by your application.
@@ -20,13 +25,4 @@ class Kernel
         //
     ];
 
-    /**
-     * Register the Closure based commands for the application.
-     *
-     * @return void
-     */
-    public static function registerRouteCommands()
-    {
-        require (config('modules.path').'/{{name}}/routes/console.php');
-    }
 }

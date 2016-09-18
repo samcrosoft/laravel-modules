@@ -39,7 +39,7 @@ class MakeControllerCommand extends MakeCommand
      * @var array
      */
     protected $listFolders = [
-        'Http/Controllers/',
+        'app/Http/Controllers/',
     ];
 
     /**

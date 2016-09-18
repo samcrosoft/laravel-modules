@@ -4,6 +4,7 @@ namespace Samcrosoft\LaravelModules\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Samcrosoft\LaravelModules\Console\Generators\MakeConsoleCommand;
+use Samcrosoft\LaravelModules\Console\Generators\MakeControllerCommand;
 use Samcrosoft\LaravelModules\Console\Generators\MakeMiddlewareCommand;
 use Samcrosoft\LaravelModules\Console\Generators\MakeMigrationCommand;
 use Samcrosoft\LaravelModules\Console\Generators\MakeModelCommand;
@@ -51,7 +52,7 @@ class GeneratorServiceProvider extends ServiceProvider
     private function registerMakeControllerCommand()
     {
         $this->app->singleton('command.make.module.controller', function ($app) {
-            return $app[MakeMigrationCommand::class];
+            return $app[MakeControllerCommand::class];
         });
 
         $this->commands('command.make.module.controller');

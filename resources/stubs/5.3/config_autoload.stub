@@ -3,6 +3,8 @@
 return [
     'providers' => [
         \{{path}}\{{namespace}}\Providers\{{namespace}}ServiceProvider::class,
+        \{{path}}\{{namespace}}\Providers\RouteServiceProvider::class,
+        \{{path}}\{{namespace}}\Providers\ConsoleServiceProvider::class,
     ],
 
     'aliases' => [

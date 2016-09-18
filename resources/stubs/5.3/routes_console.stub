@@ -13,6 +13,6 @@ use Illuminate\Foundation\Inspiring;
 |
 */
 
-Artisan::command('{{name}}', function () {
+Artisan::command('{{name}}:dummy', function () {
     $this->comment('this is the command for -> {{name}} module');
 });

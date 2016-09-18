@@ -38,7 +38,7 @@ class MakeRequestCommand extends MakeCommand
      * @var array
      */
     protected $listFolders = [
-        'Http/Requests/',
+        'app/Http/Requests/',
     ];
 
     /**

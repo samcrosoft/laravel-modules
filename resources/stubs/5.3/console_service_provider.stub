@@ -2,10 +2,14 @@
 
 namespace {{path}}\{{namespace}}\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
+use Illuminate\Support\Str;
 
-class ConsoleServiceProvider extends ServiceProvider
+/**
+ * Class ConsoleServiceProvider
+ *
+ * @package {{path}}\{{namespace}}\Providers
+ */
+class ConsoleServiceProvider extends {{namespace}}BaseServiceProvider
 {
 	/**
 	 * The controller namespace for base command folder for the module.
@@ -15,23 +19,75 @@ class ConsoleServiceProvider extends ServiceProvider
 	protected $namespace = '{{path}}\{{namespace}}\Console\Commands';
 
 	/**
+	 * The kernel class for the console commands for the module
+
+	 * @var string|null
+	 */
+	protected $kernel = '{{path}}\{{namespace}}\Console\Kernel';
+
+	/**
      * Bootstrap any application services.
      *
      * @return void
      */
 	public function boot()
 	{
-		parent::boot();
-
-		//
+		/*
+		 * Register the commands
+		 */
+		 $this->registerKernelCommands();
+		 $this->registerRouteCommands();
 	}
 
 	/**
-	 * Define the routes defined console commands for the module.
-	 *
-	 */
-	public function map(Router $router)
-	{
-		require (config('modules.path').'/{{name}}/routes/console.php');
-	}
+     * This will register the console commands listed in the kernel
+     */
+    public function registerKernelCommands()
+    {
+        $kernel_class = $this->kernel;
+        if(!class_exists($kernel_class)){
+            return;
+        }
+
+        $kernel = app($kernel_class);
+        $commands = $kernel->getCommands();
+        if (!empty($commands)) {
+            collect($commands)->each(function ($command) {
+                $this->registerAppCommand($command);
+            });
+        }
+    }
+
+
+    /**
+     * This method will inject the module commands into the artisan
+     * @param string $command
+     */
+    protected function registerAppCommand($command)
+    {
+        if (class_exists($command)) {
+            $command_class_name = class_basename($command);
+            $command_name = Str::snake($command_class_name);
+            $slug = $this->getSlug();
+            $command_name = implode(".", ["command", $slug, $command_name]);
+            /*
+             * set up a IOC command
+             */
+            $this->app->singleton($command_name, $command);
+            $this->commands($command_name);
+
+        }
+    }
+
+	/**
+     * Register the Closure based commands for the application.
+     */
+    public static function registerRouteCommands()
+    {
+        $console_route = config('modules.path').'/{{name}}/routes/console.php';
+        if(file_exists($console_route)){
+            require ($console_route);
+        }
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace {{path}}\{{namespace}};
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 
 class {{classname}} extends Command
@@ -11,7 +12,7 @@ class {{classname}} extends Command
      *
      * @var string
      */
-    protected $signature = 'dummy:command';
+    protected $signature = '{{name}}:dummy:command';
 
     /**
      * The console command description.
@@ -23,7 +24,6 @@ class {{classname}} extends Command
     /**
      * Create a new command instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -38,5 +38,6 @@ class {{classname}} extends Command
     public function handle()
     {
         //
+        $this->comment("let split some gibberish -> " . Str::random(40));
     }
 }
