@@ -290,11 +290,20 @@ class MakeCommand extends CommandGenerator
     protected function getNamespace($file)
     {
         $namespace = str_replace($this->modulePath, '', $file);
+
         $find      = basename($namespace);
         $namespace = strrev(preg_replace(strrev("/$find/"), '', strrev($namespace), 1));
         $namespace = ltrim($namespace, '\/');
         $namespace = rtrim($namespace, '\/');
+        $namespace = str_replace("\\",'/', $namespace);
 
+        /*
+         * resolve the Psr4 namespace for the app folder
+         * This is because the app folder is the base app for PSR4 loading
+         */
+        $module_namespace = $this->moduleInfo->get('namespace');
+        $namespace_app = implode("/", [$module_namespace, "app"]);
+        $namespace = str_replace($namespace_app, $module_namespace, $namespace);
         return str_replace('/', '\\', $namespace);
     }
 

@@ -38,7 +38,7 @@ class MakeSeederCommand extends MakeCommand
      * @var array
      */
     protected $listFolders = [
-        'Database/Seeds/',
+        'database/seeds/',
     ];
 
     /**
@@ -57,7 +57,8 @@ class MakeSeederCommand extends MakeCommand
      */
     protected $listStubs = [
         'default' => [
-            'seeder_plus.stub',
+            'seeder.stub',
+            //'seeder_plus.stub',
         ],
     ];
 

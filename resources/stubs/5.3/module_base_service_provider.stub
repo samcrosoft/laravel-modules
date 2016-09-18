@@ -1,0 +1,19 @@
+<?php
+
+namespace {{path}}\{{namespace}}\Providers;
+
+use Samcrosoft\LaravelModules\Support\ServiceProvider;
+
+class {{namespace}}BaseServiceProvider extends ServiceProvider
+{
+
+    /**
+     * This is the slug for the module
+     *
+     * @var null|string
+     */
+    var $slug = "{{slug}}";
+
+}
+
+

@@ -1,36 +1,44 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: adebola
+ * Date: 17/09/2016
+ * Time: 16:39
+ */
 
 namespace Samcrosoft\LaravelModules\Console\Generators;
+use Illuminate\Support\Str;
 
 /**
- * Class MakeRequestCommand
+ * Class MakeConsoleCommand
  *
  * @package Samcrosoft\LaravelModules\Console\Generators
  */
-class MakeRequestCommand extends MakeCommand
+class MakeConsoleCommand extends MakeCommand
 {
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:module:request
-    	{slug : The slug of the module.}
-    	{name : The name of the request class.}';
+    protected $signature = 'make:module:command
+    	{slug : The slug of the module}
+    	{name : The name of the command}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new module request class';
+    protected $description = 'Create a new module console command';
 
     /**
      * String to store the command type.
      *
      * @var string
      */
-    protected $type = 'Request';
+    protected $type = 'Command';
 
     /**
      * Module folders to be created.
@@ -38,7 +46,7 @@ class MakeRequestCommand extends MakeCommand
      * @var array
      */
     protected $listFolders = [
-        'app/Http/Requests/',
+        'app/Console/Commands/',
     ];
 
     /**
@@ -51,14 +59,21 @@ class MakeRequestCommand extends MakeCommand
     ];
 
     /**
+     * Module signature option.
+     *
+     * @var array
+     */
+    protected $signOption = [];
+
+    /**
      * Module stubs used to populate defined files.
      *
      * @var array
      */
     protected $listStubs = [
         'default' => [
-            'request.stub',
-        ],
+            'console.stub',
+        ]
     ];
 
     /**
@@ -72,7 +87,9 @@ class MakeRequestCommand extends MakeCommand
     {
         $this->container['filename']  = $this->makeFileName($filePath);
         $this->container['namespace'] = $this->getNamespace($filePath);
-        $this->container['path']      = $this->getBaseNamespace();
+        $this->container['path']      = $this->module->getNamespace();
+        $this->container['slug']      = Str::slug($this->argument('slug'));
+        $this->container['name']      = Str::camel($this->container['slug']);
         $this->container['classname'] = basename($filePath);
 
         return;
@@ -90,12 +107,14 @@ class MakeRequestCommand extends MakeCommand
             [
                 '{{filename}}',
                 '{{path}}',
+                '{{name}}',
                 '{{namespace}}',
                 '{{classname}}',
             ],
             [
                 $this->container['filename'],
                 $this->container['path'],
+                $this->container['name'],
                 $this->container['namespace'],
                 $this->container['classname'],
             ],

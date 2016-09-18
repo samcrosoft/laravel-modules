@@ -2,13 +2,12 @@
 
 namespace {{path}}\{{namespace}}\Providers;
 
-use App;
-use Config;
-use Lang;
-use View;
-use Samcrosoft\LaravelModules\Support\ServiceProvider;
-
-class {{namespace}}ServiceProvider extends ServiceProvider
+/**
+ * @class {{namespace}}ServiceProvider
+ *
+ * @package {{path}}\{{namespace}}\Providers
+ */
+class {{namespace}}ServiceProvider extends {{namespace}}BaseServiceProvider
 {
 	/**
 	 * Register the {{name}} module service provider.
@@ -21,7 +20,6 @@ class {{namespace}}ServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		App::register('{{path}}\{{namespace}}\Providers\RouteServiceProvider');
 	}
 
 	/**

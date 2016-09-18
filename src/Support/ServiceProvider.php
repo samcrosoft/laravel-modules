@@ -11,6 +11,15 @@ use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
  */
 class ServiceProvider extends IlluminateServiceProvider
 {
+
+    /**
+     * This is the slug for the module
+     *
+     * @var null|string
+     */
+    var $slug = null;
+
+
     /**
      * Register bindings in the container.
      *
@@ -22,22 +31,10 @@ class ServiceProvider extends IlluminateServiceProvider
     }
 
     /**
-     * Register any additional module middleware.
-     *
-     * @param  array|string  $middleware
-	 * @return void
+     * @return null|string
      */
-	protected function addMiddleware($middleware)
-	{
-	    // resolve this place for loading multiple middleware
-		$kernel = $this->app['Illuminate\Contracts\Http\Kernel'];
-
-		if (is_array($middleware)) {
-			foreach ($middleware as $ware) {
-				$kernel->pushMiddleware($ware);
-			}
-		} else {
-			$kernel->pushMiddleware($middleware);
-		}
-	}
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }
